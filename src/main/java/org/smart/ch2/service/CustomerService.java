@@ -1,22 +1,32 @@
 package org.smart.ch2.service;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.smart.ch2.helper.DataBaseHelper;
 import org.smart.ch2.model.Customer;
+import org.smart.ch2.util.PropsUtil;
 
+import java.sql.*;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.Properties;
 
 /**
  * Created by zhiming.wu on 2017/7/13.
  */
 public class CustomerService {
 
+    private static final Logger LOGGER = LoggerFactory.getLogger(CustomerService.class);
+
     /**
      * 获取客户列表
      * @return
      */
-    public List<Customer> getCustomerList(){
-        //TODO
-        return null;
+    public List<Customer> getCustomerList() {
+
+        String sql = "SELECT * FROM CUSTOMER";
+        return DataBaseHelper.queryEntityList(Customer.class,sql);
     }
 
     /**
@@ -25,8 +35,8 @@ public class CustomerService {
      * @return
      */
     public Customer getCustomer(long id){
-        //TODO
-        return null;
+        String sql = "SELECT * FROM CUSTOMER WHERE ID=?";
+        return DataBaseHelper.queryEntity(Customer.class,sql,id);
     }
 
     /**
@@ -35,8 +45,7 @@ public class CustomerService {
      * @return
      */
     public boolean createCustomer(Map<String, Object> fieldMap){
-        //TODO
-        return false;
+        return DataBaseHelper.insertEntity(Customer.class,fieldMap);
     }
 
     /**
@@ -46,8 +55,7 @@ public class CustomerService {
      * @return
      */
     public boolean updateCustomer(long id, Map<String, Object> fieldMap){
-        //TODO
-        return false;
+        return DataBaseHelper.updateEntity(Customer.class, id, fieldMap);
     }
 
     /**
@@ -56,8 +64,7 @@ public class CustomerService {
      * @return
      */
     public boolean deleteCustomer(long id){
-        //TODO
-        return false;
+        return DataBaseHelper.deleteEntity(Customer.class, id);
     }
 
 
